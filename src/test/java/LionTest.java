@@ -17,15 +17,15 @@ public class LionTest {
 
 
     @Test
-    public void getKittensOneCorrectValue(){
-        Lion lion = new Lion (felineMock);
+    public void getKittensOneCorrectValue() throws Exception {
+        Lion lion = new Lion ("Самец", felineMock);
         int expectedValue = 1;
         Mockito.when(felineMock.getKittens()).thenReturn(1);
         assertEquals(expectedValue, lion.getKittens());
     }
     @Test
     public void getFoodPredatorShowEatMeat() throws Exception {
-        Lion lion = new Lion(felineMock);
+        Lion lion = new Lion ("Самец", felineMock);
         List<String> expectedListOfFood = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(felineMock.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         assertEquals(expectedListOfFood, lion.getFood());
@@ -34,7 +34,7 @@ public class LionTest {
     @Test (expected = Exception.class)
     public void constructorExceptionTest() throws Exception {
         try {
-            Lion lion = new Lion("Оно");
+            new Lion("Оно", felineMock);
         } catch (Exception exp) {
             assertEquals("Используйте допустимые значения пола животного - самец или самка", exp.getMessage());
             throw exp;
